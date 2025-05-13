@@ -1,7 +1,12 @@
+using GitHub_Users_Repo_Web_App.Interfaces;
+using GitHub_Users_Repo_Web_App.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<IGitHubService, GitHubService>();
 
 var app = builder.Build();
 
@@ -18,10 +23,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
-
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=GitHub}/{action=SubmitUsername}/{id?}");
 
 app.Run();

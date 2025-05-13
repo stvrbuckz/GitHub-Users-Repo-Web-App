@@ -18,7 +18,7 @@ namespace GitHub_Users_Repo_Web_App.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Submit()
         {
             return View();
         }

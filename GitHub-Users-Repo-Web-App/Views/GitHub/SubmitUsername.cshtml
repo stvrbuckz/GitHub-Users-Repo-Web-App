@@ -1,0 +1,19 @@
+﻿@model UsernameDetails
+
+@{
+    ViewData["Title"] = "Submit";
+}
+
+<form asp-action="SubmitUsername" asp-controller="GitHub">
+    <div>
+        <p>Please enter a Username for a GitHub User: </p>
+        <label asp-for="Username"></label>
+        <input asp-for="Username" />
+
+        <span asp-validation-for="Username"></span>
+    </div>
+
+    <div style="margin-top: 1em;">
+        <input type="submit" value="Submit" />
+    </div>
+</form>
