@@ -12,3 +12,11 @@ You can view the user's name, location, avatar image and their top five reposito
 3. If it exists, details will appear on the next page.
 4. You can click on the Repository Name to be re-directed to that GitHub Repository.
 5. Click 'Go Back' at the bottom to return to the first page.
+
+## Running the Application
+
+In your terminal, run the command:
+
+```
+dotnet watch --no-hot-reload run --project github-users-repo-web-app
+```
