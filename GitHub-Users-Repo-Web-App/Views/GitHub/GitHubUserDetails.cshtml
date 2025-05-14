@@ -1,3 +1,55 @@
-﻿
+﻿@model GitHub_Users_Repo_Web_App.Models.GitHub.GitHubUserDetails;
+
 @{
+    ViewData["Title"] = "GitHub User Details";
 }
+
+<style>
+
+</style>
+
+<form asp-action="SubmitUsername" asp-controller="GitHub" method="post">
+    <div>
+        <p>Please find below the name, location and avatar URL of the username you inputted: </p>
+
+        <label asp-for="Name"></label>
+        <p>@Model.Name</p>
+
+        <label asp-for="Location"></label>
+        <p>@Model.Location</p>
+
+        <label asp-for="Image"></label>
+        <img src="@Model.Image" alt="Avatar Image" style="width: 200px; height: 200px;" />
+
+    </div>
+
+    <br />
+
+    <div>
+        <p>Please find below the top 5 repositories with the highest stargazer count</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Repository Name</th>
+                    <th>Repository URL</th>
+                    <th>Stargazer Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var repo in Model.Repositories)
+                {
+                    <tr>
+                        <td>@repo.Name</td>
+                        <td><a href="@repo.Url">@repo.Url</a></td>
+                        <td>@repo.StargazersCount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: 1em;">
+        <input type="submit" value="Submit" />
+    </div>
+</form>

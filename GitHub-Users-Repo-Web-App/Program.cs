@@ -1,4 +1,5 @@
 using GitHub_Users_Repo_Web_App.Interfaces;
+using GitHub_Users_Repo_Web_App.Mappers;
 using GitHub_Users_Repo_Web_App.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient<IGitHubService, GitHubService>();
+builder.Services.AddScoped<IMapper, Mapper>();
 
 var app = builder.Build();
 

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Submit";
 }
 
-<form asp-action="SubmitUsername" asp-controller="GitHub">
+<form asp-action="SubmitUsername" asp-controller="GitHub" method="post">
     <div>
         <p>Please enter a Username for a GitHub User: </p>
         <label asp-for="Username"></label>

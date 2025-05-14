@@ -2,6 +2,7 @@
 using System.Net.Http;
 using GitHub_Users_Repo_Web_App.Interfaces;
 using GitHub_Users_Repo_Web_App.Models;
+using GitHub_Users_Repo_Web_App.Models.GitHub;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GitHub_Users_Repo_Web_App.Controllers
@@ -15,10 +16,8 @@ namespace GitHub_Users_Repo_Web_App.Controllers
         {
             _gitHubService = gitHubService;
             _httpClient = new HttpClient();
+            _httpClient.DefaultRequestHeaders.Add("User-Agent", "GitHub-Users-Repo-Web-App");
         }
-
-
-
 
         [HttpGet]
         public IActionResult SubmitUsername()
@@ -31,7 +30,7 @@ namespace GitHub_Users_Repo_Web_App.Controllers
         [HttpPost]
         public IActionResult SubmitUsername(UsernameDetails model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
@@ -40,18 +39,11 @@ namespace GitHub_Users_Repo_Web_App.Controllers
         }
 
         [HttpGet]
-        public IActionResult GitHubUserDetails(string username)
+        public async Task<IActionResult> GitHubUserDetails(string username)
         {
-            //var userDetails = _gitHubService.GetUserDetails(username).Result;
+            GitHubUserDetails model = await _gitHubService.GetGitHubUserDetails(username);
 
-            var url = $"https://api.github.com/users/{username}";
-
-            var response =  _httpClient.GetAsync(url);
-
-            //response.EnsureSuccessStatusCode();
-
-
-            return View();
+            return View(model);
         }
     }
 }

@@ -20,3 +20,16 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+label {
+    font-weight: bold;
+}
+
+th {
+    width: 2000px;
+}
+
+table, th, td {
+    border: 1px solid #c2b7b7;
+    padding: 0.5em;
+}

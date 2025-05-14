@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GitHub_Users_Repo_Web_App.Models
+namespace GitHub_Users_Repo_Web_App.Models.GitHub
 {
-    public class UserDetails
+    public class GitHubUserDetails
     {
         [Display(Name = "User's Name")]
         public string Name { get; set; }
@@ -13,5 +13,7 @@ namespace GitHub_Users_Repo_Web_App.Models
 
         [Display(Name = "Avatar Image")]
         public string Image { get; set; }
+
+        public List<GitHubRepo> Repositories { get; set; }
     }
 }
