@@ -32,6 +32,7 @@ namespace GitHub_Users_Repo_Web_App.Mappers
                 {
                     Id = repo.GetProperty("id").GetInt32(),
                     Name = repo.GetProperty("name").ToString(),
+                    Description = repo.GetProperty("description").ToString(),
                     Url = repo.GetProperty("html_url").ToString(),
                     StargazersCount = repo.GetProperty("stargazers_count").GetInt32()
                 };

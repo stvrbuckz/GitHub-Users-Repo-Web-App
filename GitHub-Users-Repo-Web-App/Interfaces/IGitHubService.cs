@@ -5,6 +5,8 @@ namespace GitHub_Users_Repo_Web_App.Interfaces
 {
     public interface IGitHubService
     {
+        public Task<bool> CheckUserGitHubExists(string username);
+
         public Task<GitHubUserDetails> GetGitHubUserDetails(string username);
     }
 }

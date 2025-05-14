@@ -4,35 +4,36 @@
     ViewData["Title"] = "GitHub User Details";
 }
 
-<style>
+<div>
+    <p><u>Please find below the Name, Location and Avatar URL of the username you inputted: </u></p>
 
-</style>
+    <label asp-for="Name"></label>
+    <p>@Model.Name</p>
 
-<form asp-action="SubmitUsername" asp-controller="GitHub" method="post">
-    <div>
-        <p>Please find below the name, location and avatar URL of the username you inputted: </p>
+    <label asp-for="Location"></label>
+    <p>@Model.Location</p>
 
-        <label asp-for="Name"></label>
-        <p>@Model.Name</p>
+    <label asp-for="Image"></label>
+    <img src="@Model.Image" alt="Avatar Image" style="width: 200px; height: 200px;" />
 
-        <label asp-for="Location"></label>
-        <p>@Model.Location</p>
+</div>
 
-        <label asp-for="Image"></label>
-        <img src="@Model.Image" alt="Avatar Image" style="width: 200px; height: 200px;" />
+<br />
 
-    </div>
+<div>
 
-    <br />
-
-    <div>
-        <p>Please find below the top 5 repositories with the highest stargazer count</p>
+    @if(Model.Repositories == null || Model.Repositories.Count == 0)
+    {
+        <label class="text-danger">No respositories found for this user.</label>
+    } else
+    {
+        <p><u>Please find below the top 5 repositories with the highest stargazer count:</u></p>
 
         <table>
             <thead>
                 <tr>
                     <th>Repository Name</th>
-                    <th>Repository URL</th>
+                    <th>Description</th>
                     <th>Stargazer Count</th>
                 </tr>
             </thead>
@@ -40,16 +41,13 @@
                 @foreach (var repo in Model.Repositories)
                 {
                     <tr>
-                        <td>@repo.Name</td>
-                        <td><a href="@repo.Url">@repo.Url</a></td>
+                        <td><a href="@repo.Url">@repo.Name</a></td>
+                        <td>@repo.Description</td>
                         <td>@repo.StargazersCount</td>
                     </tr>
                 }
             </tbody>
         </table>
-    </div>
+    }
 
-    <div style="margin-top: 1em;">
-        <input type="submit" value="Submit" />
-    </div>
-</form>
+</div>

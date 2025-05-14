@@ -23,24 +23,34 @@ namespace GitHub_Users_Repo_Web_App.Controllers
         public IActionResult SubmitUsername()
         {
             UsernameDetails model = new();
-
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult SubmitUsername(UsernameDetails model)
+        public async Task<IActionResult> SubmitUsername(UsernameDetails model)
         {
+            // Check if model state is valid
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            return RedirectToAction("GitHubUserDetails", new { username = model.Username });
+            var userExists = await _gitHubService.CheckUserGitHubExists(model.Username);
+
+            // Check if user exists is true
+            if (!userExists)
+            {
+                ViewBag.ErrorMessage = "User not found. Please try a different username.";
+                return View(model);
+            }
+
+            return RedirectToAction("GitHubUserDetails", new {model.Username});
         }
 
         [HttpGet]
         public async Task<IActionResult> GitHubUserDetails(string username)
         {
+            // Get Git Hub user details and repositories
             GitHubUserDetails model = await _gitHubService.GetGitHubUserDetails(username);
 
             return View(model);

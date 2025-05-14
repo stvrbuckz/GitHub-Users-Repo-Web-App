@@ -18,16 +18,35 @@ namespace GitHub_Users_Repo_Web_App.Services
             _mapper = mapper;
         }
 
+        public async Task<bool> CheckUserGitHubExists(string username)
+        {
+            var url = $"https://api.github.com/users/{username}";
+            var response = await _httpClient.GetAsync(url);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public async Task<GitHubUserDetails> GetGitHubUserDetails(string username)
         {
             var response = await GetGitHubUserDetailsResponse(username);
 
-            GitHubUserDetails gitHubUserDetails = _mapper.MapUserDetails(response);
-            
-            var repos = GetGitHubRepos(username).Result;
-            gitHubUserDetails.Repositories = GetTopStargazerRepos(repos);
+            if(response != null && response != "")
+            {
+                GitHubUserDetails gitHubUserDetails = _mapper.MapUserDetails(response);
 
-            return gitHubUserDetails;
+                var repos = GetGitHubRepos(username).Result;
+                gitHubUserDetails.Repositories = GetTopStargazerRepos(repos);
+
+                return gitHubUserDetails;
+            } else
+            {
+                return null;
+            } 
         }
 
         private async Task<string> GetGitHubUserDetailsResponse(string username)
@@ -35,11 +54,6 @@ namespace GitHub_Users_Repo_Web_App.Services
             var url = $"https://api.github.com/users/{username}";
 
             var response = await _httpClient.GetAsync(url);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException($"Request failed with status code {response.StatusCode}");
-            }
 
             var responseContent = await response.Content.ReadAsStringAsync();
 
@@ -50,11 +64,6 @@ namespace GitHub_Users_Repo_Web_App.Services
         {
             var url = $"https://api.github.com/users/{username}/repos";
             var response = await _httpClient.GetAsync(url);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException($"Request failed with status code {response.StatusCode}");
-            }
 
             var responseContent = await response.Content.ReadAsStringAsync();
             return _mapper.MapRepos(responseContent);
