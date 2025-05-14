@@ -3,6 +3,7 @@ using GitHub_Users_Repo_Web_App.Mappers;
 using GitHub_Users_Repo_Web_App.Models;
 using GitHub_Users_Repo_Web_App.Models.GitHub;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace GitHub_Users_Repo_Web_App.Services
 {
@@ -18,17 +19,24 @@ namespace GitHub_Users_Repo_Web_App.Services
             _mapper = mapper;
         }
 
+        public async Task<HttpStatusCode> GetGitHubApiStatus()
+        {
+            var url = "https://api.github.com/users";
+            var response = await _httpClient.GetAsync(url);
+            return response.StatusCode;
+        }
+
         public async Task<bool> CheckUserGitHubExists(string username)
         {
             var url = $"https://api.github.com/users/{username}";
             var response = await _httpClient.GetAsync(url);
 
-            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public async Task<GitHubUserDetails> GetGitHubUserDetails(string username)

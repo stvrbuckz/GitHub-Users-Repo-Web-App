@@ -35,6 +35,14 @@ namespace GitHub_Users_Repo_Web_App.Controllers
                 return View(model);
             }
 
+            var apiStatus = await _gitHubService.GetGitHubApiStatus();
+
+            if(apiStatus != System.Net.HttpStatusCode.OK)
+            {
+                ViewBag.ErrorMessage = "GitHub API is currently unavailable. Please try again later.";
+                return View(model);
+            }
+
             var userExists = await _gitHubService.CheckUserGitHubExists(model.Username);
 
             // Check if user exists is true
