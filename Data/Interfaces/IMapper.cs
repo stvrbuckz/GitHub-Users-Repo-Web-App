@@ -1,6 +1,6 @@
-﻿using GitHub_Users_Repo_Web_App.Models.GitHub;
+﻿using Data.Models.GitHub;
 
-namespace GitHub_Users_Repo_Web_App.Interfaces
+namespace Data.Interfaces
 {
     public interface IMapper
     {

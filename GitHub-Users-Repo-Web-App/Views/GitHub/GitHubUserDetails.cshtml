@@ -1,4 +1,5 @@
-﻿@model GitHub_Users_Repo_Web_App.Models.GitHub.GitHubUserDetails;
+﻿@model GitHubUserDetails;
+@using Data.Models.GitHub
 
 @{
     ViewData["Title"] = "GitHub User Details";
@@ -50,4 +51,10 @@
         </table>
     }
 
+</div>
+
+<div>
+    <div style="margin-top: 1em;">
+        @Html.ActionLink("Go Back", "SubmitUsername", "GitHub")
+    </div>
 </div>

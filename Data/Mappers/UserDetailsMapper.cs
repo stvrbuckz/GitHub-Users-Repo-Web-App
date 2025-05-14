@@ -1,8 +1,8 @@
-﻿using GitHub_Users_Repo_Web_App.Interfaces;
-using GitHub_Users_Repo_Web_App.Models.GitHub;
+﻿using Data.Interfaces;
+using Data.Models.GitHub;
 using System.Text.Json;
 
-namespace GitHub_Users_Repo_Web_App.Mappers
+namespace Data.Mappers
 {
     public class Mapper : IMapper
     {

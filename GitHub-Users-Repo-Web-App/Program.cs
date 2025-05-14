@@ -1,6 +1,6 @@
-using GitHub_Users_Repo_Web_App.Interfaces;
-using GitHub_Users_Repo_Web_App.Mappers;
-using GitHub_Users_Repo_Web_App.Services;
+using Data.Interfaces;
+using Data.Mappers;
+using Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

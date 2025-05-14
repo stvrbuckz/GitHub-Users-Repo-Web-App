@@ -1,11 +1,11 @@
-﻿using GitHub_Users_Repo_Web_App.Interfaces;
-using GitHub_Users_Repo_Web_App.Mappers;
-using GitHub_Users_Repo_Web_App.Models;
-using GitHub_Users_Repo_Web_App.Models.GitHub;
+﻿using Data.Interfaces;
+using Data.Mappers;
+using Data.Models;
+using Data.Models.GitHub;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace GitHub_Users_Repo_Web_App.Services
+namespace Data.Services
 {
     public class GitHubService : IGitHubService
     {
@@ -73,7 +73,7 @@ namespace GitHub_Users_Repo_Web_App.Services
         /// This method returns the GitHub user details response from the GitHub API.
         /// </summary>
         /// <param name="username">the username of the user to search for.</param>
-        private async Task<string> GetGitHubUserDetailsResponse(string username)
+        public async Task<string> GetGitHubUserDetailsResponse(string username)
         {
             var url = $"https://api.github.com/users/{username}";
 
@@ -88,7 +88,7 @@ namespace GitHub_Users_Repo_Web_App.Services
         /// This method returns the GitHub repositories of the user from the GitHub API.
         /// </summary>
         /// <param name="username">the username of the user to search for.</param>
-        private async Task<List<GitHubRepo>> GetGitHubRepos(string username)
+        public async Task<List<GitHubRepo>> GetGitHubRepos(string username)
         {
             var url = $"https://api.github.com/users/{username}/repos";
             var response = await _httpClient.GetAsync(url);
@@ -101,7 +101,7 @@ namespace GitHub_Users_Repo_Web_App.Services
         /// This method returns the top five stargazer repositories of the user with the highest stargazer count.
         /// </summary>
         /// <param name="gitHubRepos">the list of GitHub repositories.</param>
-        private List<GitHubRepo> GetTopStargazerRepos(List<GitHubRepo> gitHubRepos)
+        public List<GitHubRepo> GetTopStargazerRepos(List<GitHubRepo> gitHubRepos)
         {
             var topStargazerRepos = gitHubRepos.OrderByDescending(repo => repo.StargazersCount)
                 .Take(5)

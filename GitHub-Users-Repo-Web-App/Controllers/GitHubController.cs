@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Net.Http;
-using GitHub_Users_Repo_Web_App.Interfaces;
-using GitHub_Users_Repo_Web_App.Models;
-using GitHub_Users_Repo_Web_App.Models.GitHub;
+using Data.Interfaces;
+using Data.Models;
+using Data.Models.GitHub;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GitHub_Users_Repo_Web_App.Controllers

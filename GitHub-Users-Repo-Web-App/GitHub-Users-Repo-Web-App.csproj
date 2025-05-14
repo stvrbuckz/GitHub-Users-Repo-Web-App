@@ -7,4 +7,8 @@
     <RootNamespace>GitHub_Users_Repo_Web_App</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj" />
+  </ItemGroup>
+
 </Project>

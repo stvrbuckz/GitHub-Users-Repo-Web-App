@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GitHub_Users_Repo_Web_App.Models
+namespace Data.Models
 {
     public class UsernameDetails
     {
